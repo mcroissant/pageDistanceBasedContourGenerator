@@ -54,7 +54,7 @@ namespace prhlt {
         release_internal_images();
         if(exists(file_path)){
             LOG4CXX_INFO(this->logger,"<<LOADING IMAGE FROM FILE>>");
-            this->image=cv::imread(file_path,CV_LOAD_IMAGE_COLOR);//   CV_LOAD_IMAGE_GRAYSCALE);CV_LOAD_IMAGE_COLOR
+            this->image=cv::imread(file_path,cv::IMREAD_COLOR);//   CV_LOAD_IMAGE_GRAYSCALE);CV_LOAD_IMAGE_COLOR
             initialize_greyscale_image();
             this->image_loaded=true;
            // display_with_scale("TEST", 1.0,1000000000000,true);
@@ -85,7 +85,7 @@ namespace prhlt {
             this->greyscale_image = cv::Mat(this->image.rows,this->image.cols,CV_8UC1,cv::Scalar(0,0,0));
             //cv::Mat xxx(this->image.rows,this->image.cols,CV_8U);
             //cv::Mat tmp(this->image.rows,this->image.cols,CV_8U,0);
-            cvtColor(this->image, this->greyscale_image, CV_RGB2GRAY);
+            cvtColor(this->image, this->greyscale_image, cv::COLOR_RGB2GRAY);
             LOG4CXX_DEBUG(this->logger,"<<DONE>>");
         }
         else

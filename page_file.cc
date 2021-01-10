@@ -958,7 +958,7 @@ void Page_File::generate_line_images(){
         vector< vector< cv::Point> > contour_vector = this->contours[i];
         for( int j = 0; j< contour_vector.size(); j++ ){
             cv::Mat mask = cv::Mat::zeros(this->image.rows,this->image.cols, CV_8UC1);
-            drawContours(mask,contour_vector,j,cv::Scalar(255), CV_FILLED);
+            drawContours(mask,contour_vector,j,cv::Scalar(255), cv::FILLED);
             //cv::Mat inv_mask(this->image.rows,this->image.cols, CV_8UC1,cv::Scalar(255));
             //drawContours(inv_mask,contour_vector,j,cv::Scalar(0), CV_FILLED);
             //cv::Scalar mean,stdev;
@@ -997,7 +997,7 @@ void Page_File::generate_line_images_with_alpha(){
         for( int j = 0; j< contour_vector.size(); j++ ){
 
             cv::Mat mask = cv::Mat::zeros(this->image.rows,this->image.cols, CV_8UC1);
-            drawContours(mask,contour_vector,j,cv::Scalar(255), CV_FILLED);
+            drawContours(mask,contour_vector,j,cv::Scalar(255), cv::FILLED);
             cv::Mat transparent( this->image.rows,this->image.cols, CV_8UC4);
             cv::Mat srcImg[] = {this->image,mask};
             int from_to[] = { 0,0, 1,1, 2,2, 3,3 };
@@ -1252,7 +1252,7 @@ void Page_File::add_loaded_baselines(int correction_factor){
                     points_stream << this->baselines[reg_count][i][j].x   <<","<< this->baselines[reg_count][i][j].y+correction_factor<<" ";
                 }
                 points_stream << this->baselines[reg_count][i].back().x   <<","<< this->baselines[reg_count][i].back().y+correction_factor;
-                LOG4CXX_DEBUG(logger,"<<Adding line>> " << ss << " : " << points_stream);
+                LOG4CXX_DEBUG(logger,"<<Adding line>> " << ss.str() << " : " << points_stream.str());
                 pugi::xml_attribute points_attr = baseline.append_attribute("points");
                 points_attr.set_value(points_stream.str().c_str());
                 line_count++;

@@ -12,6 +12,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "line_histogram.hpp"
 #include "algorithm_otsu.hpp"
+#include <opencv2/core/types_c.h>
 
 typedef vector<cv::Rect> rectangules_list;
 typedef boost::multi_array<float, 2> pixel_results;

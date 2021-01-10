@@ -9,7 +9,7 @@ namespace prhlt{
         this->logger = Logger::getLogger("PRHLT.Algorithm_SAUVOLA");
         if(ex_image.channels()>1){
             this->image = cv::Mat(ex_image.rows,ex_image.cols,CV_8UC1);
-            cvtColor(ex_image, this->image, CV_RGB2GRAY);
+            cvtColor(ex_image, this->image, cv::COLOR_RGB2GRAY);
         }
         else
             this->image= ex_image.clone();

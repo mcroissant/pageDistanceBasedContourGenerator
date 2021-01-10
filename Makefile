@@ -3,11 +3,11 @@ OUTPUTFILE_EXTRACT_LINES_V3 = extract_lines
 #--------------------------------------------------------------------------------------
 COMMONDIR = ./
 INSTALLDIR= ../BIN
-AUTO_INCLUDE = `pkg-config --cflags-only-I opencv liblog4cxx eigen3`
+AUTO_INCLUDE = `pkg-config --cflags-only-I opencv4 liblog4cxx eigen3`
 MANUAL_INCLUDE = -I$(COMMONDIR) -I/opt/local/include/
 INCLUDE = $(AUTO_INCLUDE) $(MANUAL_INCLUDE)
 
-AUTO_LIBS = `pkg-config liblog4cxx opencv eigen3 --libs`
+AUTO_LIBS = `pkg-config liblog4cxx opencv4 eigen3 --libs`
 #MANUAL_LIBS = -lboost_system-mt -lboost_program_options-mt -lboost_filesystem-mt	-lboost_thread-mt
 MANUAL_LIBS = -lboost_system -lboost_program_options -lboost_filesystem	-lboost_thread -lboost_regex
 EXTERNAL_LIBS = $(AUTO_LIBS) $(MANUAL_LIBS)
@@ -19,12 +19,15 @@ INTERNAL_EXTRACT_LINES_V3_LIBS= $(COMMONDIR)/page_file.o $(COMMONDIR)/algorithm_
 #--------------------------------------------------------------------------------------
 COPTIONS = -c -O3 -o
 #COPTIONS = -c -O0 -g -o
-LOPTIONS = -m64 -O3 -o
+LOPTIONS = -m64 -O3 -pthread -o
 OPTIONS = -w -c -O3 -pthread -o
 #LOPTIONS = -O0 -g -o
 #--------------------------------------------------------------------------------------
 all: $(OUTPUTFILE_EXTRACT_LINES_V3)
 
+%.o: %.cc %.hpp
+	$(CXX) $(OPTIONS) $@ $< $(INCLUDE)
+	
 image.o: image.cc image.hpp line_histogram.hpp
 	$(CXX) $(OPTIONS) $@ $< $(INCLUDE)
 
